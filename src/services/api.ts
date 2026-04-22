@@ -13,8 +13,10 @@ export const searchMovies = async (query: string = '', limit = 50) => {
 
 export const getMovieById = async (id: string) => {
     const res = await fetch(`${API}/titles/${id}`);
+    if (!res.ok) {
+        throw new Error(`Ошибка API: ${res.status}`);
+    }
     return res.json();
-
 }
 
 export const getMoviesByIds = async (ids: string[]) => {
@@ -28,3 +30,4 @@ export const getMoviesByIds = async (ids: string[]) => {
 
     return movies;
 }
+
